@@ -1,6 +1,19 @@
 from flask import escape
+import requests
+from flask_cors import cross_origin
+import json
 import functions_framework
 
+headers = {
+    'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+    'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 6.0; Android SDK built for x86 Build/MASTER)',
+    'Host': 'www.data199.com',
+    'Connection': 'Keep-Alive',
+    'Accept-Encoding': 'gzip',
+    'Content-Length': '555'
+}
+
+@cross_origin()
 @functions_framework.http
 def apiproxy(request):
     """HTTP Cloud Function.
@@ -12,13 +25,16 @@ def apiproxy(request):
         Response object using `make_response`
         <https://flask.palletsprojects.com/en/1.1.x/api/#flask.make_response>.
     """
-    request_json = request.get_json(silent=True)
-    request_args = request.args
+    payload = request.get_json(force=True)
+    
+    url = 'https://www.data199.com/api/v1/dashboard'
 
-    if request_json and 'name' in request_json:
-        name = request_json['name']
-    elif request_args and 'name' in request_args:
-        name = request_args['name']
-    else:
-        name = 'World'
-    return 'Hello {}!'.format(escape(name))
+    r = requests.post(url, headers=headers, data=payload)
+    return r.json()
+
+    # Local File (Tests)
+    # print(request.get_json(force=True))
+    # # print(request.to_json())
+    # data = json.load(open('./test.json', 'r', encoding='UTF-8'))
+    # return data
+   

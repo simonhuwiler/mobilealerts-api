@@ -12,3 +12,17 @@ gcloud functions deploy apiproxy --runtime python310 --trigger-http --allow-unau
 
 ## Call
 https://us-central1-mobilealerts-372415.cloudfunctions.net/apiproxy
+
+## Notizen
+* https://github.com/levyitay/AddSecurityExceptionAndroid
+
+## Run locally
+1. Install functions-framework
+```
+pip install functions-framework
+```
+
+2. Run
+```
+functions_framework --target=apiproxy
+```
