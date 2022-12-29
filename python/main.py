@@ -8,10 +8,12 @@ headers = {
     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
     'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 6.0; Android SDK built for x86 Build/MASTER)',
     'Host': 'www.data199.com',
-    'Connection': 'Keep-Alive',
-    'Accept-Encoding': 'gzip',
-    'Content-Length': '555'
+    # 'Connection': 'Keep-Alive',
+    # 'Accept-Encoding': 'gzip',
+    # 'Content-Length': '555'
 }
+
+# headers = {'Host': 'www.data199.com', 'Connection': 'keep-alive', 'Accept-Encoding': 'gzip', 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8', 'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 6.0; Android SDK built for x86 Build/MASTER)', 'Accept': '*/*', 'Accept-Language': '*', 'Sec-Fetch-Mode': 'cors', 'Content-Length': '482'}
 
 @cross_origin()
 @functions_framework.http
@@ -25,16 +27,16 @@ def apiproxy(request):
         Response object using `make_response`
         <https://flask.palletsprojects.com/en/1.1.x/api/#flask.make_response>.
     """
-    payload = request.get_json(force=True)
+    # payload = request.get_json(force=True)
     
-    url = 'https://www.data199.com/api/v1/dashboard'
+    # url = 'https://www.data199.com/api/v1/dashboard'
 
-    r = requests.post(url, headers=headers, data=payload)
-    return r.json()
+    # r = requests.post(url, headers=headers, data=payload)
+    # return r.json()
 
     # Local File (Tests)
-    # print(request.get_json(force=True))
-    # # print(request.to_json())
-    # data = json.load(open('./test.json', 'r', encoding='UTF-8'))
-    # return data
+    print(request.get_json(force=True))
+    # print(request.to_json())
+    data = json.load(open('./test.json', 'r', encoding='UTF-8'))
+    return data
    
